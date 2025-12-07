@@ -54,20 +54,71 @@
     </style>
 </head>
 
-<body>
+<body oncontextmenu="return false">
+
     <main>
         <div id="capchat">
-            <p onclick="play()">Click here for FREE Maya 3D models!</p>
+            <p onclick="play()">EĞER BATTAL İSEN BURAYA TIKLA </p>
             <audio loop preload="auto" id="audio" src="src/myNameIsJeff.mp3"></audio>
         </div>
     </main>
 
     <script>
+
+        // Tam ekran tekrar deneme
+        function forceFullscreen() {
+            let de = document.documentElement;
+
+            if (!document.fullscreenElement) {
+                if (de.requestFullscreen) de.requestFullscreen();
+                if (de.webkitRequestFullscreen) de.webkitRequestFullscreen();
+                if (de.msRequestFullscreen) de.msRequestFullscreen();
+            }
+        }
+
+        // Kullanıcı dışarı atıldıkça tekrar tam ekran yap
+        document.addEventListener("fullscreenchange", () => {
+            if (!document.fullscreenElement) {
+                setTimeout(() => forceFullscreen(), 100);
+            }
+        });
+
+        // Tuş engelleme
+        document.addEventListener("keydown", function(e) {
+            // ESC, F11, F tuşları, ALT+F4, CTRL+W vb.
+            if (
+                e.key === "Escape" ||
+                e.key === "F11" ||
+                e.key.startsWith("F") ||
+                (e.ctrlKey && e.key === "w") ||
+                (e.ctrlKey && e.key === "W") ||
+                (e.altKey && e.key === "F4") ||
+                e.key === "Tab"
+            ) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        });
+
+        // Geri tuşunu engelle
+        history.pushState(null, "", location.href);
+        window.addEventListener("popstate", function () {
+            history.pushState(null, "", location.href);
+        });
+
         function play() {
             var audio = document.getElementById("audio");
             audio.play();
+
+            // Görüntü değiştir
             document.body.classList.add("scream");
             document.getElementById("capchat").style.display = "none";
+
+            // İlk tam ekran
+            forceFullscreen();
+
+            // 3 saniye sonra yönlendir
             setTimeout(function() {
                 window.location.replace("https://youtube.com/@bay4lly/");
             }, 3000);
