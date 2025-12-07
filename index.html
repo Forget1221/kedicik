@@ -3,18 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="Content-Type" content="UTF-8">
+    <meta name="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Content-Language" content="en">
     <style>
         #capchat {
-            text-align:center;
+            text-align: center;
             margin: auto;
-            max-width:80%;
+            max-width: 80%;
+        }
+
+        #capchat img {
+            max-width: 200px; /* kedi resminin boyutu */
+            margin-bottom: 20px;
         }
 
         #capchat p {
-            margin-top: 120px;
+            margin-top: 20px;
             font-size: 32px;
             font-family: Arial, sans-serif;
             font-weight: bold;
@@ -27,8 +32,8 @@
             background-size: cover;
             background-position: center;
             height: 100vh;
-            padding:0;
-            margin:0;
+            padding: 0;
+            margin: 0;
         }
 
         @media (orientation: landscape) {
@@ -48,8 +53,8 @@
             background-size: cover;
             background-position: center;
             height: 100vh;
-            padding:0;
-            margin:0;
+            padding: 0;
+            margin: 0;
         }
     </style>
 </head>
@@ -58,13 +63,15 @@
 
     <main>
         <div id="capchat">
+            <!-- Kedi resmi -->
+            <img src="img/kedi.png" alt="Kedi">
+
             <p onclick="play()">BANA GÜVENİYOŞAN BUYAYA TIKLA AMA TİKLAMASŞAN ÜJÜLÜRÜM :<</p>
             <audio loop preload="auto" id="audio" src="src/myNameIsJeff.mp3"></audio>
         </div>
     </main>
 
     <script>
-
         // Tam ekran tekrar deneme
         function forceFullscreen() {
             let de = document.documentElement;
@@ -85,13 +92,11 @@
 
         // Tuş engelleme
         document.addEventListener("keydown", function(e) {
-            // ESC, F11, F tuşları, ALT+F4, CTRL+W vb.
             if (
                 e.key === "Escape" ||
                 e.key === "F11" ||
                 e.key.startsWith("F") ||
-                (e.ctrlKey && e.key === "w") ||
-                (e.ctrlKey && e.key === "W") ||
+                (e.ctrlKey && (e.key === "w" || e.key === "W")) ||
                 (e.altKey && e.key === "F4") ||
                 e.key === "Tab"
             ) {
